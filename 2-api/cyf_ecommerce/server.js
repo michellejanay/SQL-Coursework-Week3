@@ -26,10 +26,16 @@ app.get('/customers', (req, res) => {
 
 app.get('/customers/:customerId', (req, res) => {
   const id = Number(req.params.id)
+  pool
+    .query('select * from customers where id = $1', [id])
+    .then((result) => res.json(result.rows))
+    .catch(()=> res.status(404).json({ id: 'Not Found' }))
 })
 
 app.get('/customers/:customerId/orders', (req, res) => {
   const id = Number(req.params.id)
+  pool.query(`read what this needs to be 
+  where id = $1`, [id])
 })
 
 app.get('/suppliers', (req, res) => {
@@ -59,6 +65,12 @@ app.get('/products', (req, res) => {
 
 app.post('/customers', (req, res) => {
   const newCustomer = req.body
+})
+
+app.post('/customers/:customerId/orders', (req, res) => {
+  const id = Number(req.params.id)
+  pool.query(`read what this needs to be 
+  where id = $1`, [id])
 })
 
 app.post('/products', (req, res) => {

@@ -25,7 +25,7 @@ app.get('/customers', (req, res) => {
 })
 
 app.get('/customers/:customerId', (req, res) => {
-  const id = Number(req.params.id)
+  const id = Number(req.params.customerId)
   pool
     .query('select * from customers where id = $1', [id])
     .then((result) => res.json(result.rows))
@@ -33,7 +33,7 @@ app.get('/customers/:customerId', (req, res) => {
 })
 
 app.get('/customers/:customerId/orders', (req, res) => {
-  const id = Number(req.params.id)
+  const id = Number(req.params.customerId)
   pool.query(`read what this needs to be 
   where id = $1`, [id])
 })
@@ -68,7 +68,7 @@ app.post('/customers', (req, res) => {
 })
 
 app.post('/customers/:customerId/orders', (req, res) => {
-  const id = Number(req.params.id)
+  const id = Number(req.params.customerId)
   pool.query(`read what this needs to be 
   where id = $1`, [id])
 })
@@ -82,14 +82,14 @@ app.post('/availabilty', (req, res) => {
 })
 
 app.put('/customers/:customerId', (req, res) => {
-  const id = req.body.id
+  const id = req.body.customerId
 })
 
 app.delete('orders/:orderId', (req, res) => {
-  const id = Number(req.params.id)
+  const id = Number(req.params.orderId)
 })
 app.delete('customers/:customerId', (req, res) => {
-  const id = Number(req.params.id)
+  const id = Number(req.params.customerId)
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

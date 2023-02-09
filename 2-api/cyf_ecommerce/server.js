@@ -24,6 +24,14 @@ app.get('/customers', (req, res) => {
     .catch(() => res.status(404).json({ msg: 'Not Found' }))
 })
 
+app.get('/customers/:customerId', (req, res) => {
+  const id = Number(req.params.id)
+})
+
+app.get('/customers/:customerId/orders', (req, res) => {
+  const id = Number(req.params.id)
+})
+
 app.get('/suppliers', (req, res) => {
   pool
     .query(`select * from suppliers`)
@@ -32,6 +40,9 @@ app.get('/suppliers', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
+  let urlQuery = url.parse(req.url, true)
+  let userQuery = urlQuery.query
+
   pool
     .query(
       `
@@ -46,9 +57,27 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
-    let urlQuery = url.parse(req.url, true);
-    let userQuery = urlQuery.query
+app.post('/customers', (req, res) => {
+  const newCustomer = req.body
+})
+
+app.post('/products', (req, res) => {
+  const newProduct = req.body
+})
+
+app.post('/availabilty', (req, res) => {
+  const available = req.body
+})
+
+app.put('/customers/:customerId', (req, res) => {
+  const id = req.body.id
+})
+
+app.delete('orders/:orderId', (req, res) => {
+  const id = Number(req.params.id)
+})
+app.delete('customers/:customerId', (req, res) => {
+  const id = Number(req.params.id)
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
